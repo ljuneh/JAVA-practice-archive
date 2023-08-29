@@ -33,7 +33,7 @@ public class ShoppingBasket extends StockInfo{
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("//////////////////////////////");
+        str.append("======================================================================================================\n");
         str.append("장바구니 사용자 정보\n"+userInfo.toString()+"\n\n");
 
         str.append("장바구니 상품 목록 출력\n");
@@ -43,7 +43,7 @@ public class ShoppingBasket extends StockInfo{
             String s =  String.format("//장바구니 상품 키: %d, 상품 이름: %s, 상품 갯수: %d, 상품 가격: %d// \n", key, goods.getName(), goodsStock.get(key), goods.getPrice());
             str.append(s);
         });
-        str.append("//////////////////////////////");
+        str.append("======================================================================================================");
         return str.toString();
     }
 

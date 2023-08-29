@@ -11,10 +11,21 @@ public class PaymentInfo {
         this.orderNumber = orderNumber;
     }
     
-    public void purchaseAndUpdate(StockInfo mainBasket) {
+    public ShoppingBasket getBasket() {
+		return basket;
+	}
+	public void setBasket(ShoppingBasket basket) {
+		this.basket = basket;
+	}
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	public void purchaseAndUpdate(StockInfo mainBasket) {
     	HashMap<Integer, Goods> goodsList = basket.getGoodsList();
         HashMap<Integer, Integer> goodsStock = basket.getGoodsStock();
-        HashMap<Integer, Goods> mainList = mainBasket.getGoodsList();
         HashMap<Integer, Integer> mainStock = mainBasket.getGoodsStock();
         int totalPrice = 0;
         for(int key : goodsList.keySet()) {

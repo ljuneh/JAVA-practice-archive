@@ -22,8 +22,20 @@ public class SearchGoods {
             basket.registerStockByKey(key, goods, number);
         }
     }
+    
+    private void insertDecision(char inputChar, int key, Goods goods, ShoppingBasket basket, HashMap<Integer, Integer> goodsStock) {
+    	if(inputChar == 'y') {
+            System.out.print("구입하고자 하는 상품의 수량을 입력하세요. 수량 : ");
+            int number = Integer.parseInt(sc.nextLine());
+            int maxNumber = goodsStock.get(key);
+
+            addGoodsToBasket(key, number, maxNumber, goods, basket);
+            System.out.println();
+        }
+    }
 
     public void searchInfoByName(String name, StockInfo stockInfo, ShoppingBasket basket) {
+    	System.out.println("======================================================================================================");
         System.out.println("상품명이 "+name+"인 상품을 검색한 결과");
 
         HashMap<Integer, Goods> goodsList = stockInfo.getGoodsList();
@@ -37,18 +49,10 @@ public class SearchGoods {
                 System.out.print("해당 상품을 구입하겠습니까? (y/n) : ");
                 String input = sc.nextLine();
                 char inputChar = input.charAt(0);
-                if(inputChar == 'y') {
-                    System.out.print("구입하고자 하는 상품의 수량을 입력하세요. 수량 : ");
-                    int number = Integer.parseInt(sc.nextLine());
-                    int maxNumber = goodsStock.get(key);
-
-                    addGoodsToBasket(key, number, maxNumber, goods, basket);
-                    System.out.println();
-                }
+                insertDecision(inputChar, key, goods, basket, goodsStock);
             }
         });
-
-
+        System.out.println("======================================================================================================");
     }
 
 

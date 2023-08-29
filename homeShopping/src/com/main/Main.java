@@ -26,6 +26,7 @@ public class Main {
         searchGoods.searchInfoByName("상품이름 1", stockInfo, basket);
         searchGoods.searchInfoByName("상품이름 2", stockInfo, basket);
         searchGoods.searchInfoByName("상품이름 3", stockInfo, basket);
+        sc.close();
         
         // 장바구니 출력
         System.out.println("장바구니 출력");
