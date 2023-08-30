@@ -42,6 +42,11 @@ public class StockInfo {
         goodsList.remove(key);
         goodsStock.remove(key);
     }
+    
+    public void clearListAndStock() {
+    	goodsList.clear();
+    	goodsStock.clear();
+    }
 
     @Override
     public String toString() {

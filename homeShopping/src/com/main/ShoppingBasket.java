@@ -21,7 +21,11 @@ public class ShoppingBasket extends StockInfo{
     @Override
     public void changeStockByKey(int key, int number) {
         super.changeStockByKey(key, number);
-        System.out.println(getGoodsByKey(key)+"\n위 상품의 수량이" + getStockByKey(key) + " 으로 변경");
+        if(getGoodsByKey(key)==null) {
+        	System.out.println("바꾸자 하는 상품의 키가 존재하지 않습니다");
+        } else {
+        	System.out.println(getGoodsByKey(key)+"\n위 상품의 수량이" + getStockByKey(key) + " 으로 변경");
+        }
     }
 
     @Override
@@ -33,7 +37,7 @@ public class ShoppingBasket extends StockInfo{
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-        str.append("======================================================================================================\n");
+        
         str.append("장바구니 사용자 정보\n"+userInfo.toString()+"\n\n");
 
         str.append("장바구니 상품 목록 출력\n");
@@ -43,7 +47,7 @@ public class ShoppingBasket extends StockInfo{
             String s =  String.format("//장바구니 상품 키: %d, 상품 이름: %s, 상품 갯수: %d, 상품 가격: %d// \n", key, goods.getName(), goodsStock.get(key), goods.getPrice());
             str.append(s);
         });
-        str.append("======================================================================================================");
+        
         return str.toString();
     }
 

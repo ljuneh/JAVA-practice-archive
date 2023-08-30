@@ -35,7 +35,7 @@ public class SearchGoods {
     }
 
     public void searchInfoByName(String name, StockInfo stockInfo, ShoppingBasket basket) {
-    	System.out.println("======================================================================================================");
+    	
         System.out.println("상품명이 "+name+"인 상품을 검색한 결과");
 
         HashMap<Integer, Goods> goodsList = stockInfo.getGoodsList();
@@ -43,16 +43,23 @@ public class SearchGoods {
         if(goodsList.isEmpty()) {
             System.out.println("검색결과 없음");
         }
-        goodsList.forEach((key, goods)->{
-            if(goods.getName() == name) {
+        boolean searched = false;
+        
+        for(int key: goodsList.keySet()) {
+        	Goods goods = goodsList.get(key);
+        	if(name.equals(goods.getName())) {
+            	searched = true;
                 System.out.println(String.format("//상품 키: %d, 상품 이름: %s, 상품 갯수: %d, 상품 가격: %d// \n", key, goods.getName(), goodsStock.get(key), goods.getPrice()));
                 System.out.print("해당 상품을 구입하겠습니까? (y/n) : ");
                 String input = sc.nextLine();
                 char inputChar = input.charAt(0);
                 insertDecision(inputChar, key, goods, basket, goodsStock);
             }
-        });
-        System.out.println("======================================================================================================");
+        }
+        if(!searched) {
+        	System.out.println("검색결과 없음");
+        }
+       
     }
 
 
