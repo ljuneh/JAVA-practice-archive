@@ -1,14 +1,14 @@
 package com.jdbc_practice;
 
-public class RawMaterial {
+public class RawMaterialEntity {
 	private int id;
 	private String rawMaterialCode;
 	private String rawMaterialName;
 	private String rawMaterialType;
 	
-	public RawMaterial() {}
+	public RawMaterialEntity() {}
 	
-	public RawMaterial(int id, String rawMaterialCode, String rawMaterialName, String rawMaterialType) {
+	public RawMaterialEntity(int id, String rawMaterialCode, String rawMaterialName, String rawMaterialType) {
 		this.id = id;
 		this.rawMaterialCode = rawMaterialCode;
 		this.rawMaterialName = rawMaterialName;

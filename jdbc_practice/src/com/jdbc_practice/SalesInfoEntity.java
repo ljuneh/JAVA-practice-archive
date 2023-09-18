@@ -1,14 +1,16 @@
 package com.jdbc_practice;
 
-public class SalesInfo {
+import java.sql.Date;
+
+public class SalesInfoEntity {
 	
 	private String goodsCode;
 	private int orderQuantity;
-	private String salesDate;
+	private Date salesDate;
 	
-	public SalesInfo() {}
+	public SalesInfoEntity() {}
 	
-	public SalesInfo(String goodsCode, int orderQuantity, String salesDate) {
+	public SalesInfoEntity(String goodsCode, int orderQuantity, Date salesDate) {
 		this.goodsCode = goodsCode;
 		this.orderQuantity = orderQuantity;
 		this.salesDate = salesDate;
@@ -30,11 +32,11 @@ public class SalesInfo {
 		this.orderQuantity = orderQuantity;
 	}
 
-	public String getSalesDate() {
+	public Date getSalesDate() {
 		return salesDate;
 	}
 
-	public void setSalesDate(String salesDate) {
+	public void setSalesDate(Date salesDate) {
 		this.salesDate = salesDate;
 	}
 	

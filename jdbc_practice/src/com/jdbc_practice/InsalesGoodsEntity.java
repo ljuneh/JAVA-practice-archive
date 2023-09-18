@@ -1,20 +1,20 @@
 package com.jdbc_practice;
 
-public class ShowInsales {
+public class InsalesGoodsEntity {
 	private int seq;
 	private String goodsCode;
 	private String goodsName;
-	private String rawMaterialName;
+	private String rawMaterialCode;
 	private int rawMaterialQuantity;
 	
-	public ShowInsales() {}
+	public InsalesGoodsEntity() {}
 	
-	public ShowInsales(int seq, String goodsCode, String goodsName, 
-			String rawMaterialName, int rawMaterialQuantity) {
+	public InsalesGoodsEntity(int seq, String goodsCode, String goodsName, 
+			String rawMaterialCode, int rawMaterialQuantity) {
 		this.seq = seq;
 		this.goodsCode = goodsCode;
 		this.goodsName = goodsName;
-		this.rawMaterialName = rawMaterialName;
+		this.rawMaterialCode = rawMaterialCode;
 		this.rawMaterialQuantity = rawMaterialQuantity;
 	}
 
@@ -42,12 +42,12 @@ public class ShowInsales {
 		this.goodsName = goodsName;
 	}
 
-	public String getRawMaterialName() {
-		return rawMaterialName;
+	public String getRawMaterialCode() {
+		return rawMaterialCode;
 	}
 
-	public void setRawMaterialName(String rawMaterialName) {
-		this.rawMaterialName = rawMaterialName;
+	public void setRawMaterialCode(String rawMaterialCode) {
+		this.rawMaterialCode = rawMaterialCode;
 	}
 
 	public int getRawMaterialQuantity() {
@@ -60,8 +60,8 @@ public class ShowInsales {
 	
 	@Override
 	public String toString() {
-		return String.format("seq: %d, 상품코드: %s, 상품명: %s, 원자재이름: %s, 사용되는 원자재수량: %d", 
-				seq, goodsCode, goodsName, rawMaterialName, rawMaterialQuantity);
+		return String.format("seq: %d, 상품코드: %s, 상품명: %s, 원자재코드: %s, 원자재수량: %d", 
+				seq, goodsCode, goodsName, rawMaterialCode, rawMaterialQuantity);
 	}
-
+	
 }

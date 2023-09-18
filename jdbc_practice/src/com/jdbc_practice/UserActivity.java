@@ -17,10 +17,9 @@ public class UserActivity {
 	}
 	
 	public void showInsalesGoods() {
+		ArrayList<ShowInsalesEntity> showInsalesArr = InsalesGoodsDAO.retShowInsalesArr();
 		
-		ArrayList<ShowInsales> showInsalesArr = InsalesGoodsDAO.retShowInsalesArr();
-		
-		for(ShowInsales showInsales: showInsalesArr) {
+		for(ShowInsalesEntity showInsales: showInsalesArr) {
 			System.out.println(showInsales);
 		}
 		
@@ -73,9 +72,9 @@ public class UserActivity {
 	}
 	
 	public void showConfirmedGoods() {
-		ArrayList<OrderInfo> orderInfoArr = OrderInfoDAO.retOrderInfoArr();
+		ArrayList<OrderInfoEntity> orderInfoArr = OrderInfoDAO.retOrderInfoArr();
 		
-		for (OrderInfo orderInfo: orderInfoArr) {
+		for (OrderInfoEntity orderInfo: orderInfoArr) {
 			if(orderInfo.getOrderConfirmed().equals("N")) {
 				System.out.println(orderInfo);
 			}
@@ -85,12 +84,46 @@ public class UserActivity {
 	public void setSalesInfoWithConfirmedGoods() {
 //		SalesInfoDAO.initSalesInfo();
 		
-		ArrayList<OrderInfo> orderInfoArr = OrderInfoDAO.retOrderInfoArr();
+		int rawQuantity = 0;
+		int totalQuantity = 0;
 		
-		for (OrderInfo orderInfo: orderInfoArr) {
-			if(orderInfo.getOrderConfirmed().equals("")) {
-				SalesInfoDAO.insertSalesInfo(orderInfo);
+		int currentQuantity = 0;
+		
+		ArrayList<OrderInfoEntity> orderInfoArr = OrderInfoDAO.retOrderInfoArr();
+		
+		for (OrderInfoEntity orderInfo: orderInfoArr) {
+			if(orderInfo.getOrderConfirmed().equals("N")) {
+				
+				rawQuantity = OrderGoodsDAO1.retRawQuantityInOrderGoods(orderInfo.getGoodsCode());
+				totalQuantity = rawQuantity*orderInfo.getOrderQuantity();
+				
+				currentQuantity = StockInfoDAO.getStockInfoQuantity(OrderGoodsDAO1.retRawCodeByCode(orderInfo.getGoodsCode()));
+				
+				if(currentQuantity>=totalQuantity) {
+					System.out.println(currentQuantity-totalQuantity);
+					StockInfoDAO.updateStockInfo(OrderGoodsDAO1.retRawCodeByCode(orderInfo.getGoodsCode()), currentQuantity-totalQuantity);
+					updatesQuantityInSalesInfo(orderInfo);
+					OrderInfoDAO.updateOrderConfirmedByCode(orderInfo.getGoodsCode(), "Y", userId);
+				} else {
+					System.out.println("재고에 수량이 부족해서 "+orderInfo.getGoodsCode()+" 의 구매가 진행되지 않았습니다");
+				}
+				
+				
+//				updatesQuantityInSalesInfo(orderInfo);
+//				OrderInfoDAO.updateOrderConfirmedByCode(orderInfo.getGoodsCode(), "Y", userId);
 			}
+		}
+	}
+	
+	public void updatesQuantityInSalesInfo(OrderInfoEntity orderInfo) {
+		SalesInfoEntity salesInfo = SalesInfoDAO.retSearchedSalesInfoByCode(orderInfo.getGoodsCode());
+		int quantity = 0;
+		if(salesInfo == null) {
+			SalesInfoDAO.insertSalesInfo(orderInfo);
+		} else {
+			quantity = salesInfo.getOrderQuantity();
+			
+			SalesInfoDAO.updateSalesInfoByCode(orderInfo.getGoodsCode(), quantity+orderInfo.getOrderQuantity());
 		}
 	}
 	
@@ -139,8 +172,14 @@ public class UserActivity {
 				break;
 			}
 			
+			else if(inputNumber == 9) {
+				 StockInfoDAO.initStockInfo();
+			}
+			
 			else if(inputNumber == 0) {
-				System.out.println(OrderInfoDAO.currentSeq());
+				 OrderInfoEntity orderInfo = new OrderInfoEntity("test", 100, "T");
+				
+				 updatesQuantityInSalesInfo(orderInfo);
 			}
 			
 			

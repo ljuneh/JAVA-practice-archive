@@ -9,9 +9,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class InsalesGoodsDAO {
-	private static String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static String USER = "project";
-	private static String PASS = "ljuneh";
 	private static String QUERY1 = "select seq, goodscode, goodsname, rawmaterialcode, rawmaterialquantity\r\n"
 			+ "from insalesgoods";
 	private static String QUERY2 = "select i.seq, i.goodscode, i.goodsname, r.rawmaterialname, i.rawmaterialquantity\r\n"
@@ -28,20 +25,18 @@ public class InsalesGoodsDAO {
 	
 	
 	
-	public static ArrayList<InsalesGoods> retInsalesGoodsArr() {
-		ArrayList<InsalesGoods> inSalesGoodsArr = new ArrayList<InsalesGoods>();
+	public static ArrayList<InsalesGoodsEntity> retInsalesGoodsArr() {
+		ArrayList<InsalesGoodsEntity> inSalesGoodsArr = new ArrayList<InsalesGoodsEntity>();
 		
-		Connection conn = null;
+		Connection conn = ConfigureImpl.getConnObject();
 		Statement stmt = null;
 		ResultSet rs = null;
 		
 		try {
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(QUERY1);
-			
 			while(rs.next()) {
-				InsalesGoods insalesGoods = new InsalesGoods();
+				InsalesGoodsEntity insalesGoods = new InsalesGoodsEntity();
 				insalesGoods.setSeq(rs.getInt(1));
 				insalesGoods.setGoodsCode(rs.getString(2));
 				insalesGoods.setGoodsName(rs.getString(3));
@@ -50,6 +45,9 @@ public class InsalesGoodsDAO {
 				
 				inSalesGoodsArr.add(insalesGoods);
 			}
+			
+			rs.close();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,19 +56,18 @@ public class InsalesGoodsDAO {
 		return inSalesGoodsArr;
 	}
 	
-	public static ArrayList<ShowInsales> retShowInsalesArr() {
-		ArrayList<ShowInsales> showInsalesArr = new ArrayList<ShowInsales>();
+	public static ArrayList<ShowInsalesEntity> retShowInsalesArr() {
+		ArrayList<ShowInsalesEntity> showInsalesArr = new ArrayList<ShowInsalesEntity>();
 		
-		Connection conn = null;
+		Connection conn = ConfigureImpl.getConnObject();
 		Statement stmt = null;
 		ResultSet rs = null;
 		try {
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(QUERY2);
 			
 			while(rs.next()) {
-				ShowInsales showInsales = new ShowInsales();
+				ShowInsalesEntity showInsales = new ShowInsalesEntity();
 				showInsales.setSeq(rs.getInt(1));
 				showInsales.setGoodsCode(rs.getString(2));
 				showInsales.setGoodsName(rs.getString(3));
@@ -79,6 +76,9 @@ public class InsalesGoodsDAO {
 				
 				showInsalesArr.add(showInsales);
 			}
+			
+			rs.close();
+			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,12 +89,11 @@ public class InsalesGoodsDAO {
 	}
 	
 	public static boolean searchInsalesGoodsByCode(String code) {
-		Connection conn = null;
+		Connection conn = ConfigureImpl.getConnObject();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean isSearched = false;
 		try {
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			pstmt = conn.prepareStatement(QUERY3);
 			pstmt.setString(1, code);
 			
@@ -102,7 +101,8 @@ public class InsalesGoodsDAO {
 			
 			isSearched = rs.next();
 			
-			
+			rs.close();
+			pstmt.close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

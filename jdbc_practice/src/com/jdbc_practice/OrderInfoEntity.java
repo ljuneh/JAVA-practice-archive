@@ -1,18 +1,19 @@
 package com.jdbc_practice;
 
-public class OrderInfo {
+import java.sql.Date;
+
+public class OrderInfoEntity {
 	private String goodsCode;
 	private int orderQuantity;
 	private String orderConfirmed;
-	private String orderDate;
+	private Date orderDate;
 	
-	public OrderInfo() {}
+	public OrderInfoEntity() {}
 	
-	public OrderInfo(String goodsCode, int orderQuantity, String orderConfirmed, String orderDate) {
+	public OrderInfoEntity(String goodsCode, int orderQuantity, String orderConfirmed) {
 		this.goodsCode = goodsCode;
 		this.orderQuantity = orderQuantity;
 		this.orderConfirmed = orderConfirmed;
-		this.orderDate = orderDate;
 	}
 
 	public String getGoodsCode() {
@@ -39,11 +40,11 @@ public class OrderInfo {
 		this.orderConfirmed = orderConfirmed;
 	}
 
-	public String getOrderDate() {
+	public Date getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(String orderDate) {
+	public void setOrderDate(Date orderDate) {
 		this.orderDate = orderDate;
 	}
 	

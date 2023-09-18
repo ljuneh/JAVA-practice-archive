@@ -1,23 +1,21 @@
 package com.jdbc_practice;
 
-public class OrderGoods {
+public class ShowInsalesEntity {
 	private int seq;
 	private String goodsCode;
 	private String goodsName;
-	private String rawMaterialCode;
+	private String rawMaterialName;
 	private int rawMaterialQuantity;
-	private String inSales;
 	
-	public OrderGoods() {}
+	public ShowInsalesEntity() {}
 	
-	public OrderGoods(int seq, String goodsCode, String goodsName, 
-			String rawMaterialCode, int rawMaterialQuantity, String inSales) {
+	public ShowInsalesEntity(int seq, String goodsCode, String goodsName, 
+			String rawMaterialName, int rawMaterialQuantity) {
 		this.seq = seq;
 		this.goodsCode = goodsCode;
 		this.goodsName = goodsName;
-		this.rawMaterialCode = rawMaterialCode;
+		this.rawMaterialName = rawMaterialName;
 		this.rawMaterialQuantity = rawMaterialQuantity;
-		this.inSales = inSales;
 	}
 
 	public int getSeq() {
@@ -44,12 +42,12 @@ public class OrderGoods {
 		this.goodsName = goodsName;
 	}
 
-	public String getRawMaterialCode() {
-		return rawMaterialCode;
+	public String getRawMaterialName() {
+		return rawMaterialName;
 	}
 
-	public void setRawMaterialCode(String rawMaterialCode) {
-		this.rawMaterialCode = rawMaterialCode;
+	public void setRawMaterialName(String rawMaterialName) {
+		this.rawMaterialName = rawMaterialName;
 	}
 
 	public int getRawMaterialQuantity() {
@@ -59,15 +57,11 @@ public class OrderGoods {
 	public void setRawMaterialQuantity(int rawMaterialQuantity) {
 		this.rawMaterialQuantity = rawMaterialQuantity;
 	}
-
-	public String getInSales() {
-		return inSales;
-	}
-
-	public void setInSales(String inSales) {
-		this.inSales = inSales;
-	}
 	
-	
+	@Override
+	public String toString() {
+		return String.format("seq: %d, 상품코드: %s, 상품명: %s, 원자재이름: %s, 사용되는 원자재수량: %d", 
+				seq, goodsCode, goodsName, rawMaterialName, rawMaterialQuantity);
+	}
 
 }

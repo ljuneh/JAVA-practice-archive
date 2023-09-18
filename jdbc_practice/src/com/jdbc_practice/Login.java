@@ -8,10 +8,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Login {
-	private static String DB_URL = "jdbc:oracle:thin:@localhost:1521:xe";
-	private static String USER = "project";
-	private static String PASS = "ljuneh";
-	
 	private static String QUERY1 = "select userid, userpassword, role\r\n"
 			+ "from userinfo\r\n"
 			+ "where userid = ?";
@@ -21,9 +17,10 @@ public class Login {
 	public Login() {}
 	
 	public static void enter(Scanner sc) {
-		Connection conn = null;
+		Connection conn = ConfigureImpl.getConnObject();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		LoginEntity loginEntity = null;
 		
 		boolean isIdPassed = false;
 		boolean isPasswordPassed = false;
@@ -36,14 +33,22 @@ public class Login {
 		String enteredPassword = sc.nextLine();
 		
 		
-		ResultSet retRs = searchId(conn, pstmt, rs, enteredId);
+		try {
+			pstmt = conn.prepareStatement(QUERY1);
+			pstmt.setString(1, enteredId);
+			loginEntity = searchId(conn, pstmt, rs, enteredId);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
-		if((retRs==null) && (--loginCount>0)) {
+		
+		if((loginEntity==null) && (--loginCount>0)) {
 			System.out.println("처음 로그인으로 돌아옵니다. 로그인 카운트가 "+loginCount+"만큼 남았습니다");
 			enter(sc);
 			return;
-		} else if((retRs!=null) && (--loginCount>0)) {
+		} else if((loginEntity!=null) && (loginCount>0)) {
 			isIdPassed = true;
 			
 		} else if(loginCount == 0) {
@@ -52,10 +57,10 @@ public class Login {
 		}
 		
 		try {
-			if(enteredPassword.equals(retRs.getString(2))) {
+			if(enteredPassword.equals(loginEntity.getUserPassword())) {
 				isPasswordPassed = true;
-				role = retRs.getString(3).charAt(0);
-			} else if((loginCount>0)) {
+				role = loginEntity.getRole().charAt(0);
+			} else if((--loginCount>0)) {
 				System.out.println("잘못된 비밀번호를 입력했습니다. " + "로그인 카운트가 "+loginCount+"만큼 남았습니다");
 				enter(sc);
 				return;
@@ -63,10 +68,16 @@ public class Login {
 				System.out.println("로그인 카운트 제한 횟수 초과");
 				return;
 			}
+			
+			
+			pstmt.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // end id and password check
+		
+	
 		
 		
 		if(isIdPassed&&isPasswordPassed&&(role=='a')) {
@@ -78,20 +89,21 @@ public class Login {
 			
 			UserActivity userActivity = new UserActivity(sc,enteredId);
 			
+			
 		}
 		
 	}
 	
-	private static ResultSet searchId(Connection conn, PreparedStatement pstmt, ResultSet rs, String enteredId) {
+	private static LoginEntity searchId(Connection conn, PreparedStatement pstmt, ResultSet rs, String enteredId) {
+		LoginEntity loginEntity = new LoginEntity();
 		try {
-			conn = DriverManager.getConnection(DB_URL, USER, PASS);
-			pstmt = conn.prepareStatement(QUERY1);
-			pstmt.setString(1, enteredId);
 			rs = pstmt.executeQuery();
 			
 			
 			if(rs.next()) {
-//				
+				loginEntity.setUserId(rs.getString(1));
+				loginEntity.setUserPassword(rs.getString(2));
+				loginEntity.setRole(rs.getString(3));
 //				System.out.println(rs.getString(1));
 //				System.out.println(rs.getString(2));
 //				System.out.println(rs.getString(3));
@@ -100,11 +112,15 @@ public class Login {
 				return null;
 			}
 			
+			rs.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return rs;
+		
+		
+		return loginEntity;
 	}
 	
 	
