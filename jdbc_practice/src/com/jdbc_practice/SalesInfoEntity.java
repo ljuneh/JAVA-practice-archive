@@ -42,7 +42,7 @@ public class SalesInfoEntity {
 	
 	@Override
 	public String toString() {
-		return String.format("상품코드: %s, 상품수량: %s, 결제시간: %s", goodsCode, orderQuantity, salesDate);
+		return String.format("\t상품이름: %s │ 상품수량: %-4s │ 결제일: %s", goodsCode, orderQuantity, salesDate);
 	}
 
 }

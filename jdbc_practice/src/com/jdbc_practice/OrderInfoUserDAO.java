@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class OrderInfoDAO {
+public class OrderInfoUserDAO {
 	private static String QUERY1 = "select seq, goodsCode, orderQuantity, orderConfirmed, orderDate, userid\r\n"
 			+ "from orderinfo\r\n"
 			+ "where goodscode = ?\r\n"
@@ -24,7 +24,7 @@ public class OrderInfoDAO {
 	private static String QUERY4 = "INSERT INTO orderinfo(seq, goodscode, orderquantity, userid) VALUES(?, ?, ?, ?)";
 
 	
-	public OrderInfoDAO() {}
+	public OrderInfoUserDAO() {}
 	
 	public static int currentSeq() {
 		Connection conn = ConfigureImpl.getConnObject();

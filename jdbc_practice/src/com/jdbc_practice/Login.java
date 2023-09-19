@@ -14,9 +14,12 @@ public class Login {
 	
 	private static int loginCount = 3;
 	
+	static Mention men = new Mention();
+	
 	public Login() {}
 	
 	public static void enter(Scanner sc) {
+		
 		Connection conn = ConfigureImpl.getConnObject();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -83,6 +86,10 @@ public class Login {
 		if(isIdPassed&&isPasswordPassed&&(role=='a')) {
 			System.out.println("로그인 성공");
 			System.out.println("관리자 권한으로 로그인합니다");
+			
+			Mention.MakeBox1(men,  men.getLoginAdmin());
+			
+			MakeAdmin admin = new MakeAdmin(conn, sc);
 		} else if(isIdPassed&&isPasswordPassed&&(role=='u')) {
 			System.out.println("로그인 성공");
 			System.out.println("사용자 권한으로 로그인합니다");

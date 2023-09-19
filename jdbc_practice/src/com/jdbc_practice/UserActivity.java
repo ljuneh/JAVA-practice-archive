@@ -17,7 +17,7 @@ public class UserActivity {
 	}
 	
 	public void showInsalesGoods() {
-		ArrayList<ShowInsalesEntity> showInsalesArr = InsalesGoodsDAO.retShowInsalesArr();
+		ArrayList<ShowInsalesEntity> showInsalesArr = InsalesGoodsUserDAO.retShowInsalesArr();
 		
 		for(ShowInsalesEntity showInsales: showInsalesArr) {
 			System.out.println(showInsales);
@@ -44,7 +44,7 @@ public class UserActivity {
 //			OrderInfoDAO.updateOrderConfirmedByCode(code, quantity, "Y");
 			
 			////새로 작성한 코드
-			OrderInfoDAO.insertOrderInfo(code, quantity, userId);
+			OrderInfoUserDAO.insertOrderInfo(code, quantity, userId);
 			
 		}
 	}
@@ -58,7 +58,7 @@ public class UserActivity {
 			System.out.print("취소할 상품의 코드를 입력하세요 >>> ");
 			String code = sc.nextLine();
 			
-			OrderInfoDAO.updateOrderConfirmedByCode(code, "C", userId);
+			OrderInfoUserDAO.updateOrderConfirmedByCode(code, "C", userId);
 			
 		}
 	}
@@ -72,7 +72,7 @@ public class UserActivity {
 	}
 	
 	public void showConfirmedGoods() {
-		ArrayList<OrderInfoEntity> orderInfoArr = OrderInfoDAO.retOrderInfoArr();
+		ArrayList<OrderInfoEntity> orderInfoArr = OrderInfoUserDAO.retOrderInfoArr();
 		
 		for (OrderInfoEntity orderInfo: orderInfoArr) {
 			if(orderInfo.getOrderConfirmed().equals("N")) {
@@ -89,21 +89,21 @@ public class UserActivity {
 		
 		int currentQuantity = 0;
 		
-		ArrayList<OrderInfoEntity> orderInfoArr = OrderInfoDAO.retOrderInfoArr();
+		ArrayList<OrderInfoEntity> orderInfoArr = OrderInfoUserDAO.retOrderInfoArr();
 		
 		for (OrderInfoEntity orderInfo: orderInfoArr) {
 			if(orderInfo.getOrderConfirmed().equals("N")) {
 				
-				rawQuantity = OrderGoodsDAO1.retRawQuantityInOrderGoods(orderInfo.getGoodsCode());
+				rawQuantity = OrderGoodsUserDAO.retRawQuantityInOrderGoods(orderInfo.getGoodsCode());
 				totalQuantity = rawQuantity*orderInfo.getOrderQuantity();
 				
-				currentQuantity = StockInfoDAO.getStockInfoQuantity(OrderGoodsDAO1.retRawCodeByCode(orderInfo.getGoodsCode()));
+				currentQuantity = StockInfoDAO.getStockInfoQuantity(OrderGoodsUserDAO.retRawCodeByCode(orderInfo.getGoodsCode()));
 				
 				if(currentQuantity>=totalQuantity) {
 					System.out.println(currentQuantity-totalQuantity);
-					StockInfoDAO.updateStockInfo(OrderGoodsDAO1.retRawCodeByCode(orderInfo.getGoodsCode()), currentQuantity-totalQuantity);
+					StockInfoDAO.updateStockInfo(OrderGoodsUserDAO.retRawCodeByCode(orderInfo.getGoodsCode()), currentQuantity-totalQuantity);
 					updatesQuantityInSalesInfo(orderInfo);
-					OrderInfoDAO.updateOrderConfirmedByCode(orderInfo.getGoodsCode(), "Y", userId);
+					OrderInfoUserDAO.updateOrderConfirmedByCode(orderInfo.getGoodsCode(), "Y", userId);
 				} else {
 					System.out.println("재고에 수량이 부족해서 "+orderInfo.getGoodsCode()+" 의 구매가 진행되지 않았습니다");
 				}
@@ -116,14 +116,14 @@ public class UserActivity {
 	}
 	
 	public void updatesQuantityInSalesInfo(OrderInfoEntity orderInfo) {
-		SalesInfoEntity salesInfo = SalesInfoDAO.retSearchedSalesInfoByCode(orderInfo.getGoodsCode());
+		SalesInfoEntity salesInfo = SalesInfoUserDAO.retSearchedSalesInfoByCode(orderInfo.getGoodsCode());
 		int quantity = 0;
 		if(salesInfo == null) {
-			SalesInfoDAO.insertSalesInfo(orderInfo);
+			SalesInfoUserDAO.insertSalesInfo(orderInfo);
 		} else {
 			quantity = salesInfo.getOrderQuantity();
 			
-			SalesInfoDAO.updateSalesInfoByCode(orderInfo.getGoodsCode(), quantity+orderInfo.getOrderQuantity());
+			SalesInfoUserDAO.updateSalesInfoByCode(orderInfo.getGoodsCode(), quantity+orderInfo.getOrderQuantity());
 		}
 	}
 	

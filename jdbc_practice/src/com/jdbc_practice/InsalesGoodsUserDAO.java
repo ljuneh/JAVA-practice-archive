@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-public class InsalesGoodsDAO {
+public class InsalesGoodsUserDAO {
 	private static String QUERY1 = "select seq, goodscode, goodsname, rawmaterialcode, rawmaterialquantity\r\n"
 			+ "from insalesgoods";
 	private static String QUERY2 = "select i.seq, i.goodscode, i.goodsname, r.rawmaterialname, i.rawmaterialquantity\r\n"
@@ -21,7 +21,7 @@ public class InsalesGoodsDAO {
 	
 
 	
-	public InsalesGoodsDAO() {}
+	public InsalesGoodsUserDAO() {}
 	
 	
 	

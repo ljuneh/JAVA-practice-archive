@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderGoodsDAO1 {
+public class OrderGoodsUserDAO {
 	
 	private static String QUERY1 = "select rawmaterialquantity\r\n"
 			+ "from ordergoods\r\n"
@@ -15,7 +15,7 @@ public class OrderGoodsDAO1 {
 			+ "from ordergoods\r\n"
 			+ "where goodscode = ?";
 	
-	public OrderGoodsDAO1() {}
+	public OrderGoodsUserDAO() {}
 	
 	public static int retRawQuantityInOrderGoods(String code) {
 		int quantity = 0;

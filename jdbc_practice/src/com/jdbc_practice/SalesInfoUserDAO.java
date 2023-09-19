@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SalesInfoDAO {
+public class SalesInfoUserDAO {
 	private static String QUERY1 = "truncate table salesinfo";
 	private static String QUERY2 = "INSERT INTO salesinfo(goodscode, orderquantity) VALUES(?, ?)";
 	private static String QUERY3 = "select goodscode, orderquantity, salesdate\r\n"
@@ -18,7 +18,7 @@ public class SalesInfoDAO {
 			+ "where goodscode = ?";
 	
 	
-	public SalesInfoDAO() {}
+	public SalesInfoUserDAO() {}
 	
 	public static void initSalesInfo() {
 		Connection conn = ConfigureImpl.getConnObject();
