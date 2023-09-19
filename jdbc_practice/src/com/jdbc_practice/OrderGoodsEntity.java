@@ -1,7 +1,7 @@
 package com.jdbc_practice;
 
 //ENTITY
-public class OrderGoodsET {
+public class OrderGoodsEntity {
 	private int SEQ;
 	private String GOODSCODE;
 	private String GOODSNAME;
@@ -9,9 +9,9 @@ public class OrderGoodsET {
 	private int RAWMATERIALQUANTITY;
 	private String INSALES;
 	
-	public OrderGoodsET() {}
+	public OrderGoodsEntity() {}
 	
-	public OrderGoodsET(int SEQ, String GOODSCODE, String GOODSNAME, 
+	public OrderGoodsEntity(int SEQ, String GOODSCODE, String GOODSNAME, 
 			String RAWMATERIALCODE, int RAWMATERIALQUANTITY, String INSALES) {
 		this.SEQ = SEQ;
 		this.GOODSCODE = GOODSCODE;

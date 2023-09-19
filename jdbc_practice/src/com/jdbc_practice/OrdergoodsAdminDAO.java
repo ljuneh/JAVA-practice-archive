@@ -10,13 +10,13 @@ public class OrdergoodsAdminDAO {
 
 	SqlMention sql = new SqlMention();
 	
-	public ArrayList<OrderGoodsET> getList_ViewInfo(MakeAdmin admin, int pickInSales) {
+	public ArrayList<OrderGoodsEntity> getList_ViewInfo(MakeAdmin admin, int pickInSales) {
 		//필요한 객체를 담을 지역 변수 미리 만들기
 		Connection conn = admin.getConn();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		 
-		ArrayList<OrderGoodsET> list = new ArrayList<>();
+		ArrayList<OrderGoodsEntity> list = new ArrayList<>();
 
 		try {
 
@@ -37,7 +37,7 @@ public class OrdergoodsAdminDAO {
 			
 			while (rs.next()) {
 				// cursor 가 위치한 곳의 칼럼 데이터를 빼오기
-				OrderGoodsET ordergoodsET = new OrderGoodsET();
+				OrderGoodsEntity ordergoodsET = new OrderGoodsEntity();
 				ordergoodsET.setGOODSCODE(rs.getString(1));
 				ordergoodsET.setGOODSNAME(rs.getString(2));
 				ordergoodsET.setRAWMATERIALCODE(rs.getString(3));

@@ -19,7 +19,7 @@ public class ProductInfo {
 	InsalesGoodsAdminDAO iDAO = new InsalesGoodsAdminDAO();
 	OrdergoodsAdminDAO oDAO = new OrdergoodsAdminDAO();
 	
-	ArrayList<OrderGoodsET> oET = new ArrayList<>();
+	ArrayList<OrderGoodsEntity> oET = new ArrayList<>();
 	
 	public ProductInfo() {}
 	
@@ -123,10 +123,10 @@ public class ProductInfo {
 	    }
 	}
 	
-	private void printList(ArrayList<OrderGoodsET> oET) {
+	private void printList(ArrayList<OrderGoodsEntity> oET) {
 		System.out.println("\t======================상품 조회======================");
 	       
-	       for(OrderGoodsET dto:oET) {
+	       for(OrderGoodsEntity dto:oET) {
 	    	   System.out.println(dto.toString());
 	       }
 	   }   
