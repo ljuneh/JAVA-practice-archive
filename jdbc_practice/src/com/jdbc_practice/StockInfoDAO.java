@@ -23,9 +23,11 @@ public class StockInfoDAO {
 			stmt = conn.createStatement();
 			int iRet = stmt.executeUpdate(QUERY1);
 			if(iRet>=1) {
-				System.out.println("초기화 성공");
+				System.out.printf("\t│%18s"+"초기화 성공","");
+				System.out.println();
 			} else {
-				System.out.println("초기화 실패");
+				System.out.printf("\t│%18s"+"초기화 실패","");
+				System.out.println();
 			}
 			
 		} catch (SQLException e) {

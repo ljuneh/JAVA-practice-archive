@@ -41,6 +41,8 @@ public class AdminActivity {
 				else if(choicemenu == 3) {
 					System.out.printf(men.getMiddleLine2(), "",men.getAdminMenu3(),"");
 					System.out.println(men.getBottomLine());
+					
+					StockInfoDAO.initStockInfo();
 				}
 				
 			}
