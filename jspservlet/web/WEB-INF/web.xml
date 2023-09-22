@@ -19,4 +19,8 @@
     <servlet-name>ServletHelloWorld</servlet-name>
     <url-pattern>/ServletHelloWorld</url-pattern>
   </servlet-mapping>
+  <context-param>
+  	<param-name>max_connection_count</param-name>
+  	<param-value>50</param-value>
+  </context-param>
 </web-app>
