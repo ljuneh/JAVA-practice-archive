@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<% String id = (String) session.getAttribute("id"); %>
+	<%= id %>
 
 </body>
 </html>

@@ -1,0 +1,126 @@
+@use '_structure.scss';
+
+
+.carousel{
+    width: 100%;
+    height: 50vh;
+    border: 1px solid structure.$border-color;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: auto;
+    .carousel-inner {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        vertical-align: middle;
+    }
+}
+
+.home-subtitle {
+    border: 1px solid structure.$border-color;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+    padding: 20px;
+}
+
+.readmeContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5%;
+}
+.readmeContent {
+    width: 100%;
+    height: 300px;
+    // background-color: gray;
+    border: none;
+    border-radius: 20px;
+    a {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px;
+        text-decoration: none;
+        border-radius: 20px;
+        position: relative;
+        
+    }
+    .readmeScreen {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: none;
+        top: 0;
+        box-shadow: inset 0 0 0 0px structure.$bg-color;
+        transition: box-shadow 0.5s ease-in-out;
+    }
+
+    &:hover {
+        .readmeScreen {
+            box-shadow: inset 0 0 0 30px structure.$bg-color;
+        }
+    }
+}
+
+.readmestyle {
+    h4 {
+        transform: translateY(30px);
+        transition: transform 0.5s ease-in-out;
+    }
+    a {
+        text-align: center;
+    }
+    p {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+        margin-top:  30px;
+        transform: translateY(20px);
+    }
+    &:hover {
+        p {
+            opacity: 1;
+        }
+        h4 {
+            transform: translateY(10px);
+        }
+    }
+    
+}
+
+.resume {
+    background-color: #0a0036;
+    a {
+        color: cornsilk;
+    }
+}
+
+.portfolio {
+    background-color: #3c6330;
+    a {
+        color: cornsilk;
+    }
+}
+
+.market {
+    background-color: #8d5151;
+    a {
+        color: cornsilk;
+    }
+}
+
+@media screen and (max-width:1280px){
+    .readmeContainer {
+        grid-template-columns: 1fr;
+        min-height: 1100px;
+    }
+    
+}

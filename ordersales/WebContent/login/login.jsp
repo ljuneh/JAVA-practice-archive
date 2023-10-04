@@ -59,7 +59,7 @@
             <input type="password" placeholder="비밀번호" class="in" name = "password">
             <input type="submit" id="btn" value="로그인"><br>
         </form>
-        <a href="#none">비밀번호를 잊어버리셨나요?</a>
+        <a href="http://localhost:8090/ordersales/login/registermember.jsp">회원가입</a>
     </div>
 </body>
 

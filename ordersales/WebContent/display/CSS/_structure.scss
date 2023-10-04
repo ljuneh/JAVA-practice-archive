@@ -1,0 +1,102 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+
+$bg-color : #e0e0e0;
+$active-color: #3b55c9a1;
+$border-color: rgba(100, 100, 100, 0.5);
+
+h1 {
+    font-weight: bold;
+}
+div {
+    box-sizing: border-box;
+}
+.navbar {
+    padding-bottom: 3px;
+    background-color: $bg-color;
+}
+.nav_list {
+    font-weight: bold;
+}
+.nav-item {
+    &:hover {
+        a{
+            color: $active-color;
+        }
+        .bar {
+            width: 100%;
+        }
+    }
+}
+.bar {
+    width: 0%;
+    height: 5px;
+    background-color: $active-color;
+    margin: auto;
+    transition: width 0.5s;
+}
+.dropdown-menu {
+    width: 300px;
+    background-color: $bg-color;
+}
+
+.scroll-progress {
+    background-color: $border-color;
+}
+
+.progress-bar {
+    height: 5px;
+}
+::-webkit-progress-bar {
+    background-color: $active-color;
+    background-size: cover;
+}
+
+
+main, footer{
+    padding: 5% 20% 10% 20%;
+}
+
+
+body {
+    background-color: $bg-color;
+    margin: 0px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+// body::after {
+//     background: url("https://cdn.pixabay.com/photo/2018/08/15/13/10/galaxy-3608029_1280.jpg") no-repeat 100% 0 scroll;
+//     background-size: cover;
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     content: "";
+//     z-index: -1;
+//     opacity: 0.5;
+// }
+
+header {
+    position: sticky;
+    top: 0px;
+    z-index: 100;
+}
+
+
+
+footer {
+    color: $border-color;
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 768px) {
+    main, footer{
+        padding: 5% 5% 10% 5%;
+    }
+}
