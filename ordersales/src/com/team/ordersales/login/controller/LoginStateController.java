@@ -1,4 +1,4 @@
-package com.team.ordersales.display.controller;
+package com.team.ordersales.login.controller;
 
 import java.io.IOException;
 
@@ -8,24 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team.ordersales.display.service.DisplayGoodsService;
-import com.team.ordersales.display.utils.ServletForward;
-import com.team.ordersales.login.service.LoginCheckService;
+import com.team.ordersales.login.service.LoginStateService;
+import com.team.ordersales.login.utils.ServletForward;
 
-@WebServlet("/displaygoods")
-public class DisplayGoodsController extends HttpServlet { 
-	
+@WebServlet("/loginstate")
+public class LoginStateController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		new LoginCheckService().sessionCheck(req);
-		
-		new DisplayGoodsService().retGoods(req);
+		new LoginStateService().doServletByState(req);
 		
 		new ServletForward().pageForward(req, resp);
+		
 	}
 	
 	@Override

@@ -24,22 +24,30 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="">
+                <form action="/ordersales/ordergoods">
                     <div class="modal-header">
                         <div class="modal-title" id="exampleModalLabel">
-                            <h5>상품명 타이틀</h5>
-                            <p>??,??? 원</p>
+                            <input name="name" class="d-block" id="title-for-modal" type="text" readonly value="상품명 타이틀">
+                            <!-- <h5 id="title-for-modal">상품명 타이틀</h5> -->
+                            <input name="code" type="text" class="d-none" id="code-for-modal" value="code">
+                            <input name="raw" type="text" class="d-none" id="raw-for-modal" value="raw">
+                            <input name="current" type="text" class="d-none" id="current-for-modal" value="current">
+                            <input name="price" id="price-for-modal" style="display: inline-block;" value="??,???">
+                            <p style="display: inline-block;">원</p>
                         </div>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         <div class="countbutton d-flex" id="countbutton">
                             <button type="button" id="minus" onclick="countNumber('minus')" disabled="true">-</button>
-                            <input id="count" type="number" readonly min="1" value="1">
-                            <button type="button" onclick="countNumber('plus')">+</button>
+                            <input name="quantity" id="count" type="number" min="1" value="1">
+                            <button type="button" id="plus" onclick="countNumber('plus')">+</button>
                         </div>
                     </div>
                     <div class="modal-body d-flex justify-content-between align-bottom">
                         <p class="d-inline-block fw-bold">합계</p>
-                        <h4 class="d-inline-block modalprice fw-bolder">??,??? 원</h4>
+                        <div>
+                            <input name="totalprice" type="text" class="d-inline-block modalprice fw-bolder" id="totalprice-for-modal" value="??,???">
+                            <h4 style="display: inline-block;">원</h4>
+                        </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-around">
                         <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
@@ -56,9 +64,9 @@
             <button class="btn" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="recieveuserinfo d-flex flex-sm-row flex-column align-content-center">
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="#">회원가입</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="http://localhost:8090/ordersales/login/registermember.jsp">회원가입</a></div>
             <div class="sidebar"></div>
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="#">로그인</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href= "http://localhost:8090/ordersales/loginstate">${headermsg}</a></div>
         </div>
     </div>
     <header>
@@ -77,7 +85,7 @@
                     		<div class="bar"></div>
                   		</li>
                           <li class="nav-item">
-                    		<a class="nav-link active" aria-current="page" href="market.html">신상품</a>
+                    		<a class="nav-link active" aria-current="page" href="http://localhost:8090/ordersales/displaygoods">신상품</a>
                     		<div class="bar"></div>
                   		</li>
                         <li class="nav-item">
@@ -131,14 +139,18 @@
 
                     <div class="col-lg-4 col-md-6">
                         <div class="box-card">
-                            <div class="box-card">
+                            <div class="box-card modalsend">
                                 <a href="#">
                                     <div class="card" style="width: 100%;">
                                         <img src="/ordersales/display/images/item1.jpg" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <p class="product-subtext">새벽배송</p>
+                                            <p class="d-none product-code">${insalesgoods.goodsCode}</p>
+                                            <p class="d-none product-raw">${insalesgoods.rawmaterialquantity}</p>
+                                            <p class="d-none product-current">${insalesgoods.currentrawquantity}</p>
                                             <h3 class="product-title">${insalesgoods.goodsName}</h3>
-                                            <h4 class="product-price">${insalesgoods.price}원</h4>
+                                            <h4 class="product-price" style="display: inline-block;">${insalesgoods.price}</h4>
+                                            <h4 style="display: inline-block;">원</h4>
                                         </div>
                                     </div>
                                 </a>
@@ -174,6 +186,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" 
     crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
     <script>
 		function progressBar() {
@@ -207,16 +220,53 @@
         const countbutton = document.getElementById('countbutton');
         countbutton.addEventListener("click", function() {
             console.log("countbutton clicked");
-            const button = document.getElementById('minus');
+            const mbutton = document.getElementById('minus');
+            const pbutton = document.getElementById('plus');
             const result = document.getElementById('count');
             let number = parseInt(result.value);
-            console.log(number);
+            const price = parseInt(document.getElementById('price-for-modal').value);
+            const totalprice = price*number;
+            const raw = parseInt(document.getElementById('raw-for-modal').value);
+            const current = parseInt(document.getElementById('current-for-modal').value);
+
+            result.max = current;
+
+
+            $("#totalprice-for-modal").val(totalprice);
             if (number > 1) {
-                button.disabled=false;
+                mbutton.disabled=false;
                 console.log("button able");
             } else {
-                button.disabled=true;
+                mbutton.disabled=true;
             }
+
+            if((current != 0) &&(current > number*raw)) {
+                pbutton.disabled=false;
+                console.log(number);
+            } else {
+                pbutton.disabled=true;
+            }
+        });
+
+
+        $(".cart-button").click(function() {
+
+            const parent = $(this).closest(".modalsend");
+            const name = parent.find(".product-title");
+            const price = parent.find(".product-price");
+            const code = parent.find(".product-code");
+            const raw = parent.find(".product-raw");
+            const current = parent.find(".product-current");
+            console.log(name.html());
+
+
+            $("#title-for-modal").val(name.html());
+            $("#code-for-modal").val(code.html());
+            $("#price-for-modal").val(price.html());
+            $("#totalprice-for-modal").val(price.html());
+
+            $("#raw-for-modal").val(raw.html());
+            $("#current-for-modal").val(current.html());
         });
 
     </script>

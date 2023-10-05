@@ -51,6 +51,7 @@
 	    </fieldset>
 	    <input type="submit" value="회원가입">
 	  </form>
+	  <button onclick="history.back()">Back</button>
 </body>
 
 </html>
