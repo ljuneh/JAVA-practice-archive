@@ -93,7 +93,7 @@
                     		<div class="bar"></div>
                   		</li>
                         <li class="nav-item">
-                    		<a class="nav-link " href="#">장바구니</a>
+                    		<a class="nav-link " href="http://localhost:8090/ordersales/displaybasket">장바구니</a>
                     		<div class="bar"></div>
                   		</li>
                           <li class="nav-item">

@@ -8,28 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team.ordersales.login.utils.ServletForward;
-import com.team.ordersales.order.dto.OrderToBasketDto;
-import com.team.ordersales.order.service.OrderToBasketService;
+import com.team.ordersales.display.utils.ServletForward;
+import com.team.ordersales.login.service.LoginCheckService;
+import com.team.ordersales.order.service.DeleteBasketService;
 
-
-@WebServlet("/ordergoods")
-public class OrderToBasketController extends HttpServlet {
+@WebServlet("/deletebasket")
+public class DeleteBasketController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		req.setCharacterEncoding("UTF-8");
 		
-		String code = req.getParameter("code");
-		int quantity = Integer.parseInt(req.getParameter("quantity"));
+		int seq = Integer.parseInt(req.getParameter("seq"));
 		
-		OrderToBasketDto orderToBasketDto = new OrderToBasketDto(code, quantity);
 		
-		new OrderToBasketService().orderGoods(orderToBasketDto, req);
+		new LoginCheckService().sessionCheck(req);
 		
+		new DeleteBasketService().deleteGoodsInBasket(seq, req);
 		
 		new ServletForward().pageForward(req, resp);
+		
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package com.team.ordersales.display.dao;
+package com.team.ordersales.order.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,17 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.team.ordersales.display.entity.InsalesGoodsEntity;
+import com.team.ordersales.order.entity.OrderInfoEntity;
 import com.team.ordersales.utils.ConfigureImpl;
 
-public class DisplayGoodsDao {
+public class DisplayBasketDao {
 	
-	public static ArrayList<InsalesGoodsEntity> retInsalesGoodsEntity() {
-		String sql_insalesgoods = "select seq, goodscode, goodsname, rawmaterialcode, rawmaterialquantity, price\r\n" + 
-				"from insalesgoods";
-		
-		ArrayList<InsalesGoodsEntity> insalesGoodsEntityArr = new ArrayList<InsalesGoodsEntity>();
-		
+	public static ArrayList<OrderInfoEntity> retOrderInfoEntity(String id, String confirmed) {
+		String sql = "select seq, goodscode, orderquantity, orderconfirmed, orderdate, id\r\n" + 
+				"from orderinfo\r\n" + 
+				"where id = ?\r\n" + 
+				"and orderconfirmed = ?\r\n" + 
+				"ORDER BY seq asc";
 		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -25,22 +25,30 @@ public class DisplayGoodsDao {
 			e.printStackTrace();
 		}
 		
+		ArrayList<OrderInfoEntity> orderInfoEntityArr = new ArrayList<OrderInfoEntity>();
+		
+		
 		Connection conn = ConfigureImpl.getConnObject();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
 		try {
-			pstmt = conn.prepareStatement(sql_insalesgoods);
-
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			pstmt.setString(2, confirmed);
+			
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				insalesGoodsEntityArr.add
-				(new InsalesGoodsEntity
-						(rs.getInt("seq"), rs.getString("goodscode"), 
-						rs.getString("goodsname"), rs.getString("rawmaterialcode"),
-						rs.getInt("rawmaterialquantity"), rs.getInt("price")));
+				OrderInfoEntity orderInfoEntity = new OrderInfoEntity();
+				orderInfoEntity.setSeq(rs.getInt(1));
+				orderInfoEntity.setGoodsCode(rs.getString(2));
+				orderInfoEntity.setOrderQuantity(rs.getInt(3));
+				orderInfoEntity.setOrderConfirmed(rs.getString(4));
+				orderInfoEntity.setOrderDate(rs.getDate(5));
+				orderInfoEntity.setId(rs.getString(6));
 				
+				orderInfoEntityArr.add(orderInfoEntity);
 			}
 			
 			rs.close();
@@ -53,22 +61,22 @@ public class DisplayGoodsDao {
 		ConfigureImpl.closeConn();
 		
 		
-		return insalesGoodsEntityArr;
+		return orderInfoEntityArr;
 	}
 	
-	public static int retCurrentRawQuantity(String code) {
-		String sql = "select s.rawmaterialquantity\r\n" + 
-				"from stockinfo s, insalesgoods i\r\n" + 
-				"where s.rawmaterialcode = i.rawmaterialcode\r\n" + 
-				"and i.goodscode = ?";
+	public static String retGoodsNameByCode(String code) {
+		String name = "";
+		String sql = "select goodsname\r\n" + 
+				"from ordergoods\r\n" + 
+				"where goodscode = ?";
 		
-		int quantity = 0;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Connection conn = ConfigureImpl.getConnObject();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -80,7 +88,7 @@ public class DisplayGoodsDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				quantity = rs.getInt(1);
+				name = rs.getString(1);
 			}
 			
 			rs.close();
@@ -91,22 +99,23 @@ public class DisplayGoodsDao {
 		}
 		ConfigureImpl.closeConn();
 		
-		
-		return quantity;
+		return name;
 	}
 	
-	public static int retNeededRawQuantity(String code) {
-		String sql = "select rawmaterialquantity\r\n"
-				+ "from ordergoods\r\n"
-				+ "where goodscode = ?";
+	public static int retPriceByCode(String code) {
+		int price = 0;
 		
-		int quantity = 0;
+		String sql = "select price\r\n" + 
+				"from ordergoods\r\n" + 
+				"where goodscode = ?";
+		
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Connection conn = ConfigureImpl.getConnObject();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -118,7 +127,7 @@ public class DisplayGoodsDao {
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				quantity = rs.getInt(1);
+				price = rs.getInt(1);
 			}
 			
 			rs.close();
@@ -129,7 +138,7 @@ public class DisplayGoodsDao {
 		}
 		ConfigureImpl.closeConn();
 		
-		return quantity;
+		return price;
 	}
 
 }

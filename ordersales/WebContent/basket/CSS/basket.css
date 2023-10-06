@@ -1,0 +1,139 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css");
+h1 {
+  font-weight: bold;
+}
+
+div {
+  box-sizing: border-box;
+}
+
+.navbar {
+  padding-bottom: 3px;
+  background-color: #e0e0e0;
+}
+
+.nav_list {
+  font-weight: bold;
+}
+
+.nav-item:hover a {
+  color: rgba(59, 85, 201, 0.631372549);
+}
+.nav-item:hover .bar {
+  width: 100%;
+}
+
+.bar {
+  width: 0%;
+  height: 5px;
+  background-color: rgba(59, 85, 201, 0.631372549);
+  margin: auto;
+  transition: width 0.5s;
+}
+
+.dropdown-menu {
+  width: 300px;
+  background-color: #e0e0e0;
+}
+
+.scroll-progress {
+  background-color: rgba(100, 100, 100, 0.5);
+}
+
+.progress-bar {
+  height: 5px;
+}
+
+::-webkit-progress-bar {
+  background-color: rgba(59, 85, 201, 0.631372549);
+  background-size: cover;
+}
+
+main, footer {
+  padding: 5% 20% 10% 20%;
+}
+
+body {
+  background-color: #e0e0e0;
+  margin: 0px;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+header {
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+}
+
+footer {
+  color: rgba(100, 100, 100, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  main, footer {
+    padding: 5% 5% 10% 5%;
+  }
+}
+.search-container {
+  padding: 20px;
+}
+.search-container .recieveuserinfo {
+  font-size: 10px;
+  margin-left: 20px;
+  height: 100%;
+}
+.search-container .recieveuserinfo .receivemenu {
+  min-width: 40px;
+}
+.search-container a {
+  color: black;
+  -webkit-text-decoration: none black;
+          text-decoration: none black;
+}
+
+.sidebar {
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.search-box {
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 350px;
+}
+.search-box .form-control {
+  background-color: #e0e0e0;
+  margin-right: 0px;
+}
+
+.basket-goods {
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 50px;
+  background-color: #e0e0e0;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
+.send-button {
+  display: block;
+  width: 100px;
+  height: 30px;
+  margin-top: 100px;
+  float: right;
+}
+
+main, footer {
+  padding: 5% 5% 5% 10%;
+}
+
+@media screen and (max-width: 576px) {
+  .sidebar {
+    width: 100%;
+    margin: 5px 0px;
+  }
+}/*# sourceMappingURL=basket.css.map */

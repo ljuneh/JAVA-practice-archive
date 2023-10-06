@@ -1,4 +1,4 @@
-package com.team.ordersales.order.controller;
+package com.team.ordersales.sales.controller;
 
 import java.io.IOException;
 
@@ -8,28 +8,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.team.ordersales.login.utils.ServletForward;
-import com.team.ordersales.order.dto.OrderToBasketDto;
-import com.team.ordersales.order.service.OrderToBasketService;
+import com.team.ordersales.display.utils.ServletForward;
+import com.team.ordersales.sales.service.PurchaseGoodsService;
 
-
-@WebServlet("/ordergoods")
-public class OrderToBasketController extends HttpServlet {
+@WebServlet("/purchasegoods")
+public class PurchaseGoodsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		
-		String code = req.getParameter("code");
-		int quantity = Integer.parseInt(req.getParameter("quantity"));
-		
-		OrderToBasketDto orderToBasketDto = new OrderToBasketDto(code, quantity);
-		
-		new OrderToBasketService().orderGoods(orderToBasketDto, req);
-		
+		new PurchaseGoodsService().purchaseGoodsInBasket(req);
 		
 		new ServletForward().pageForward(req, resp);
+		
 	}
 	
 	@Override

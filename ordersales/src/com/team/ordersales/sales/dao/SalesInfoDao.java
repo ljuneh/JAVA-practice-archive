@@ -1,106 +1,21 @@
-package com.team.ordersales.display.dao;
+package com.team.ordersales.sales.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import com.team.ordersales.display.entity.InsalesGoodsEntity;
+import com.team.ordersales.order.entity.OrderInfoEntity;
+import com.team.ordersales.sales.entity.SalesInfoEntity;
 import com.team.ordersales.utils.ConfigureImpl;
 
-public class DisplayGoodsDao {
+public class SalesInfoDao {
 	
-	public static ArrayList<InsalesGoodsEntity> retInsalesGoodsEntity() {
-		String sql_insalesgoods = "select seq, goodscode, goodsname, rawmaterialcode, rawmaterialquantity, price\r\n" + 
-				"from insalesgoods";
-		
-		ArrayList<InsalesGoodsEntity> insalesGoodsEntityArr = new ArrayList<InsalesGoodsEntity>();
-		
-		
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		Connection conn = ConfigureImpl.getConnObject();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql_insalesgoods);
-
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
-				insalesGoodsEntityArr.add
-				(new InsalesGoodsEntity
-						(rs.getInt("seq"), rs.getString("goodscode"), 
-						rs.getString("goodsname"), rs.getString("rawmaterialcode"),
-						rs.getInt("rawmaterialquantity"), rs.getInt("price")));
-				
-			}
-			
-			rs.close();
-			pstmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ConfigureImpl.closeConn();
-		
-		
-		return insalesGoodsEntityArr;
-	}
-	
-	public static int retCurrentRawQuantity(String code) {
-		String sql = "select s.rawmaterialquantity\r\n" + 
-				"from stockinfo s, insalesgoods i\r\n" + 
-				"where s.rawmaterialcode = i.rawmaterialcode\r\n" + 
-				"and i.goodscode = ?";
-		
-		int quantity = 0;
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Connection conn = ConfigureImpl.getConnObject();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, code);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				quantity = rs.getInt(1);
-			}
-			
-			rs.close();
-			pstmt.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ConfigureImpl.closeConn();
-		
-		
-		return quantity;
-	}
-	
-	public static int retNeededRawQuantity(String code) {
-		String sql = "select rawmaterialquantity\r\n"
-				+ "from ordergoods\r\n"
+	public static SalesInfoEntity retSearchedSalesInfoByCode(String code) {
+		String sql = "select goodscode, orderquantity, salesdate\r\n"
+				+ "from salesinfo\r\n"
 				+ "where goodscode = ?";
 		
-		int quantity = 0;
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
@@ -111,25 +26,106 @@ public class DisplayGoodsDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
+		SalesInfoEntity salesInfoEntity = new SalesInfoEntity();
+		
+		
+		boolean isSearched = false;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, code);
 			
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
-				quantity = rs.getInt(1);
+			isSearched = rs.next();
+			if(isSearched) {
+				salesInfoEntity.setGoodsCode(rs.getString(1));
+				salesInfoEntity.setOrderQuantity(rs.getInt(2));
+				salesInfoEntity.setSalesDate(rs.getDate(3));
+			} else {
+				return null;
 			}
-			
+				
 			rs.close();
 			pstmt.close();
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ConfigureImpl.closeConn();
 		
-		return quantity;
+		return salesInfoEntity;
+	}
+	
+	public static int insertSalesInfo(OrderInfoEntity orderInfo) {
+		String sql = "INSERT INTO salesinfo(goodscode, orderquantity) VALUES(?, ?)";
+		int iRet = 0;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conn = ConfigureImpl.getConnObject();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, orderInfo.getGoodsCode());
+			pstmt.setInt(2, orderInfo.getOrderQuantity());
+			
+			iRet = pstmt.executeUpdate();
+			
+			
+			
+			
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ConfigureImpl.closeConn();
+		
+		return iRet;
+	}
+	
+	public static int updateSalesInfoByCode(String code, int quantity) {
+		String sql = "update salesinfo\r\n"
+				+ "set orderquantity = ?\r\n"
+				+ "where goodscode = ?";
+		int iRet = 0;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Connection conn = ConfigureImpl.getConnObject();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, quantity);
+			pstmt.setString(2, code);
+			
+			iRet = pstmt.executeUpdate();
+			
+			
+			
+			
+			pstmt.close();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ConfigureImpl.closeConn();
+		
+		
+		return iRet;
 	}
 
 }
