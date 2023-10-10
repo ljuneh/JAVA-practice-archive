@@ -3,8 +3,7 @@ package com.team.ordersales.sales.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import java.sql.SQLException;import com.team.ordersales.login.service.LoginCheckService;
 import com.team.ordersales.utils.ConfigureImpl;
 
 public class StockInfoDao {
@@ -66,6 +65,34 @@ public class StockInfoDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, quantity);
 			pstmt.setString(2, rawCode);
+			iRet = pstmt.executeUpdate();
+			
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ConfigureImpl.closeConn();
+		
+		return iRet;
+	}
+	
+	public static int initStock() {
+		String sql = "update stockinfo\r\n" + 
+				"set rawmaterialquantity = 50";
+		int iRet = 0;
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Connection conn = ConfigureImpl.getConnObject();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
 			iRet = pstmt.executeUpdate();
 			
 			pstmt.close();

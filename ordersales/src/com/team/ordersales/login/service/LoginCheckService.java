@@ -19,6 +19,13 @@ public class LoginCheckService {
 				session.setAttribute("id", id);
 			}
 			
+			String role = LoginCheckDao.retRole(sParaId);
+			if(role.equals("admin")) {
+				req.setAttribute("pageurl", "/displaystock");
+			} else if (role.equals("user")) {
+				req.setAttribute("pageurl", "/displaygoods");
+			}
+			
 		} else {
 			req.setAttribute("pageurl", "/login/registermember.jsp");
 			req.setAttribute("id", sParaId);

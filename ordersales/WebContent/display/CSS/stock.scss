@@ -1,0 +1,66 @@
+@use '_structure.scss';
+
+.search-container {
+    padding: 20px;
+    .recieveuserinfo{
+        font-size: 10px;
+        margin-left: 20px;
+        height: 100%;
+        .receivemenu {
+            min-width: 40px;
+        }
+    }
+    a {
+        color: black;
+        text-decoration: none black;
+    }
+}
+
+.sidebar {
+    border: 1px solid rgba(100, 100, 100, 0.5); 
+    margin-left: 10px; 
+    margin-right: 10px;
+}
+
+.search-box {
+    border: 1px solid structure.$border-color;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 350px;
+    .form-control {
+        background-color: structure.$bg-color;
+        margin-right: 0px;
+    }
+}
+
+
+.stock-line {
+    border: 1px solid structure.$border-color;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 50px;
+    background-color: structure.$bg-color;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
+.send-button {
+    display: block;
+    width: 100px;
+    height: 30px;
+    margin-top: 100px;
+    float: right;
+}
+
+
+main, footer{
+    padding: 5% 5% 5% 10%;
+}
+
+@media screen and (max-width: 576px){
+    .sidebar {
+        width: 100%;
+        margin: 5px 0px;
+    }
+}

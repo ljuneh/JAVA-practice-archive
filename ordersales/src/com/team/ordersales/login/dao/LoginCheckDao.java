@@ -50,5 +50,44 @@ public class LoginCheckDao {
 		
 		return false;
 	}
+	
+	public static String retRole(String id) {
+		String role = null;
+		String sql = "select role\r\n" + 
+				"from loginuser\r\n" + 
+				"where id = ?";
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Connection conn = ConfigureImpl.getConnObject();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				role = rs.getString(1);
+			}
+			
+			rs.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		ConfigureImpl.closeConn();
+		
+		return role;
+	}
 
 }
