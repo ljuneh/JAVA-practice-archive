@@ -21,6 +21,10 @@
 	      color: rgb(0, 60, 255);
 	      font-style: italic;
 	    }
+		button {
+			display: inline-block;
+			margin-left: 300px;
+		}
 	</style>
 	</head>
 

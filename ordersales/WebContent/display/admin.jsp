@@ -28,9 +28,9 @@
             <button class="btn" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="recieveuserinfo d-flex flex-sm-row flex-column align-content-center">
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="http://localhost:8090/ordersales/login/registermember.jsp">회원가입</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="/ordersales/login/registermember.jsp">회원가입</a></div>
             <div class="sidebar"></div>
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href= "http://localhost:8090/ordersales/loginstate">${headermsg}</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href= "/ordersales/loginstate">${headermsg}</a></div>
         </div>
     </div>
     <header>
@@ -49,7 +49,7 @@
                     		<div class="bar"></div>
                   		</li>
                           <li class="nav-item">
-                    		<a class="nav-link active" aria-current="page" href="http://localhost:8090/ordersales/displaygoods">재고</a>
+                    		<a class="nav-link active" aria-current="page" href="/ordersales/displaygoods">재고</a>
                     		<div class="bar"></div>
                   		</li>
                         <li class="nav-item">
@@ -92,7 +92,7 @@
             <div class="row">
 
                 <div class="col-12">
-                    <button class="send-button" type="button" onclick="location.href= 'http://localhost:8090/ordersales/initstock' ">재고 초기화</button>
+                    <button class="send-button" type="button" onclick="location.href= '/ordersales/initstock' ">재고 초기화</button>
                 </div> 
 
                 <h1>전체 재고</h1>

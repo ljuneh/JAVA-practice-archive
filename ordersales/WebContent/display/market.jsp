@@ -64,9 +64,9 @@
             <button class="btn" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="recieveuserinfo d-flex flex-sm-row flex-column align-content-center">
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="http://localhost:8090/ordersales/login/registermember.jsp">회원가입</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="/ordersales/login/registermember.jsp">회원가입</a></div>
             <div class="sidebar"></div>
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href= "http://localhost:8090/ordersales/loginstate">${headermsg}</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href= "/ordersales/loginstate">${headermsg}</a></div>
         </div>
     </div>
     <header>
@@ -85,7 +85,7 @@
                     		<div class="bar"></div>
                   		</li>
                           <li class="nav-item">
-                    		<a class="nav-link active" aria-current="page" href="http://localhost:8090/ordersales/displaygoods">신상품</a>
+                    		<a class="nav-link active" aria-current="page" href="/ordersales/displaygoods">신상품</a>
                     		<div class="bar"></div>
                   		</li>
                         <li class="nav-item">
@@ -93,7 +93,7 @@
                     		<div class="bar"></div>
                   		</li>
                         <li class="nav-item">
-                    		<a class="nav-link " href="http://localhost:8090/ordersales/displaybasket">장바구니</a>
+                    		<a class="nav-link " href="/ordersales/displaybasket">장바구니</a>
                     		<div class="bar"></div>
                   		</li>
                           <li class="nav-item">

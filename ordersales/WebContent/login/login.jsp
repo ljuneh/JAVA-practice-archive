@@ -14,7 +14,7 @@
         }
 
         body {
-            background-color: #1BBC9B;
+            background-color: #7a7a7a;
         }
 
         div {
@@ -59,7 +59,7 @@
             <input type="password" placeholder="비밀번호" class="in" name = "password">
             <input type="submit" id="btn" value="로그인"><br>
         </form>
-        <a href="http://localhost:8090/ordersales/login/registermember.jsp">회원가입</a>
+        <a href="/ordersales/login/registermember.jsp">회원가입</a>
         <button onclick="history.back()">Back</button>
     </div>
 </body>
