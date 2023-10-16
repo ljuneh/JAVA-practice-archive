@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean name="scores" class="springcore.setinjection.ref.Scores" 
+		p:maths="80.5" p:physics="90.5" p:chemistry="100"/>
+		
+	<bean name="student" class="springcore.setinjection.ref.Student">
+		<property name="scores">
+			<ref bean="scores"/>
+		</property>
+	</bean>
+	
+	<bean name="item1" class="springcore.setinjection.ref.Item" p:id="1" p:name="name1" p:price="10.0" p:quantity="1" />
+	<bean name="item2" class="springcore.setinjection.ref.Item" p:id="2" p:name="name2" p:price="20.0" p:quantity="2" />
+	<bean name="item3" class="springcore.setinjection.ref.Item" p:id="3" p:name="name3" p:price="30.0" p:quantity="3" />
+	
+	<bean name="shoppingcart" class="springcore.setinjection.ref.ShoppingCart">
+		<property name="itemList">
+			<list>
+				<ref bean="item1"/>
+				<ref bean="item2"/>
+				<ref bean="item3"/>
+			</list>
+		</property>
+	</bean>
+</beans>
