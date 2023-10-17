@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<bean name="prescription" class="springcore.dependencycheck.Predescription" 
+		p:id="123" p:sPatientName="홍길동" >
+		<property name="medicines">
+			<list>
+				<value>1번약</value>
+				<value>2번약</value>
+				<value>3번약</value>
+				<value>4번약</value>
+				<value>5번약</value>
+				<value>6번약</value>
+			</list>
+		</property>
+	</bean>
+	
+	<context:annotation-config />
+	<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor" />
+</beans>
