@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:component-scan base-package="com.springmybatis" />
+
+	<bean 
+		class="org.apache.commons.dbcp2.BasicDataSource" 
+		name="dbcp" 
+		p:driverClassName="oracle.jdbc.OracleDriver" 
+		p:url="jdbc:oracle:thin:@localhost:1521:xe" 
+		p:username="project" p:password="ljuneh" />
+		
+	<bean 
+		class="org.mybatis.spring.SqlSessionFactoryBean" 
+		name="sqlSessionFactoryBean" 
+		p:dataSource-ref="dbcp" 
+		p:mapperLocations="classpath:/mybatis/config/*.xml" 
+		p:typeAliasesPackage="com.springmybatis.dto" />
+	
+	<bean 
+		class="org.mybatis.spring.SqlSessionTemplate" 
+		name="sqlSessionTemplate" 
+		c:sqlSessionFactory-ref="sqlSessionFactoryBean" />
+		
+	<bean class="com.springmybatis.dao.impl.MemberDaoImpl" 
+		name="memberDao">
+		<constructor-arg ref="sqlSessionTemplate" />
+	</bean>
+	
+</beans> 
