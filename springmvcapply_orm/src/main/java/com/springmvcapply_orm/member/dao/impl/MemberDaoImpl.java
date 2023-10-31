@@ -14,8 +14,8 @@ public class MemberDaoImpl implements MemberDao {
 	private HibernateTemplate hibernateTemplate;
 
 	@Override
-	public int create(Member member) {
-		int result = (int) hibernateTemplate.save(member);
+	public String create(Member member) {
+		String result = (String) hibernateTemplate.save(member);
 		return result;
 	}
 

@@ -16,8 +16,8 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	@Transactional
-	public int createMember(Member member) {
-		int result = memberDao.create(member);
+	public String createMember(Member member) {
+		String result = memberDao.create(member);
 		return result;
 	}
 

@@ -20,7 +20,7 @@
 		name="dataSource" 
 		p:driverClassName="oracle.jdbc.OracleDriver" 
 		p:url="jdbc:oracle:thin:@localhost:1521:xe"
-		p:username="project" p:password="ljuneh" />
+		p:username="ormpractice" p:password="ljuneh" />
 
 	<bean class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
 		name="sessionFactory" p:dataSource-ref="dataSource">
