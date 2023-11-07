@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import com.shopping.login.dto.RegisterDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,6 +20,7 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "userinfo")
+@DynamicInsert
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,5 +33,16 @@ public class UserInfo {
 	private String password;
 	private String auth;
 	private String email;
+	@Column(name="username")
+	private String name;
 	
+	public static UserInfo createUserInfo(RegisterDto registerDto) {
+		UserInfo userInfo = new UserInfo();
+		userInfo.setId(registerDto.getId());
+		userInfo.setPassword(registerDto.getPassword());
+		userInfo.setEmail(registerDto.getEmail());
+		userInfo.setName(registerDto.getName());
+		
+		return userInfo;
+	}
 }

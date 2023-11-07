@@ -30,7 +30,6 @@
                             <input name="name" class="d-block" id="title-for-modal" type="text" readonly value="상품명 타이틀">
                             <!-- <h5 id="title-for-modal">상품명 타이틀</h5> -->
                             <input name="code" type="text" class="d-none" id="code-for-modal" value="code">
-                            <input name="raw" type="text" class="d-none" id="raw-for-modal" value="raw">
                             <input name="current" type="text" class="d-none" id="current-for-modal" value="current">
                             <input name="price" id="price-for-modal" style="display: inline-block;" value="??,???">
                             <p style="display: inline-block;">원</p>
@@ -64,7 +63,7 @@
             <button class="btn" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="recieveuserinfo d-flex flex-sm-row flex-column align-content-center">
-            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="/shopping/login" id="login-register">회원가입</a></div>
+            <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href="/shopping/registerpage" id="login-register">회원가입</a></div>
             <div class="sidebar"></div>
             <div class="receivemenu d-flex align-content-center flex-wrap justify-content-center"><a href= "/shopping/loginstate" id="login-state">${headermsg}</a></div>
         </div>
@@ -132,21 +131,20 @@
         <div class="container">
             <div class="row">
 
-                <!-- <c:forEach var="insalesgoods" items="${insalesGoodsArr}">
+                <c:forEach var="insalesDto" items="${insalesDtoList}">
 
                     <div class="col-lg-4 col-md-6">
                         <div class="box-card">
                             <div class="box-card modalsend">
                                 <a href="#">
                                     <div class="card" style="width: 100%;">
-                                        <img src="resources/images/item1.jpg" class="card-img-top" alt="...">
+                                        <img src="resources/images/${insalesDto.imageSource}.jpg" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <p class="product-subtext">새벽배송</p>
-                                            <p class="d-none product-code">${insalesgoods.goodsCode}</p>
-                                            <p class="d-none product-raw">${insalesgoods.rawmaterialquantity}</p>
-                                            <p class="d-none product-current">${insalesgoods.currentrawquantity}</p>
-                                            <h3 class="product-title">${insalesgoods.goodsName}</h3>
-                                            <h4 class="product-price" style="display: inline-block;">${insalesgoods.price}</h4>
+                                            <p class="d-none product-code">${insalesDto.goodsCode}</p>
+                                            <p class="d-none product-current">${insalesDto.goodsQuantity}</p>
+                                            <h3 class="product-title">${insalesDto.goodsName}</h3>
+                                            <h4 class="product-price" style="display: inline-block;">${insalesDto.price}</h4>
                                             <h4 style="display: inline-block;">원</h4>
                                         </div>
                                     </div>
@@ -157,7 +155,7 @@
                             </div>
                         </div>
                     </div>
-	            </c:forEach> -->
+	            </c:forEach>
 
                 
                 
@@ -235,7 +233,6 @@
             let number = parseInt(result.value);
             const price = parseInt(document.getElementById('price-for-modal').value);
             const totalprice = price*number;
-            const raw = parseInt(document.getElementById('raw-for-modal').value);
             const current = parseInt(document.getElementById('current-for-modal').value);
 
             result.max = current;
@@ -249,7 +246,7 @@
                 mbutton.disabled=true;
             }
 
-            if((current != 0) &&(current > number*raw)) {
+            if((current != 0) &&(current > number)) {
                 pbutton.disabled=false;
                 console.log(number);
             } else {
@@ -264,7 +261,6 @@
             const name = parent.find(".product-title");
             const price = parent.find(".product-price");
             const code = parent.find(".product-code");
-            const raw = parent.find(".product-raw");
             const current = parent.find(".product-current");
             console.log(name.html());
 
@@ -274,7 +270,7 @@
             $("#price-for-modal").val(price.html());
             $("#totalprice-for-modal").val(price.html());
 
-            $("#raw-for-modal").val(raw.html());
+            
             $("#current-for-modal").val(current.html());
         });
 

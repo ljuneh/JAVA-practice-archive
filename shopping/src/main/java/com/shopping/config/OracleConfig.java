@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan("com.shopping.dao")
-public class MySQLConfig {
+@MapperScan("com.shopping.dao, com.shopping.login.dao, com.shopping.display.dao")
+public class OracleConfig {
 	
 	@Bean
 	public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
