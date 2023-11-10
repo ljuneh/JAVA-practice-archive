@@ -1,4 +1,4 @@
-package com.shopping.order.entity;
+package com.shopping.sales.entity;
 
 import java.util.Date;
 
@@ -28,37 +28,36 @@ import lombok.ToString;
 @Getter
 @SequenceGenerator(
         name = "SEQ_GENERATOR",
-        sequenceName = "ORDER_SEQ",
+        sequenceName = "SALES_SEQ",
         allocationSize = 1
 )
 @Setter
 @Entity
-@Table(name = "orderinfo")
+@Table(name = "salesinfo")
 @DynamicInsert
 @DynamicUpdate
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class OrderInfo {
+public class SalesInfo {
 	@Id
-	@Column(name="orderseq")
+	@Column(name="salesseq")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_GENERATOR")
-	private int orderSeq;
+	private int salesSeq;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "goodscode")
 	private OrderGoods orderGoods;
 	
-	@Column(name="orderquantity")
-	private int orderQuantity;
+	@Column(name="salesquantity")
+	private int salesQuantity;
 	
-	private String confirmed;
+	@Column(name="salesdate")
+	private Date salesDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userid")
 	private UserInfo userInfo;
 	
-	@Column(name="orderdate")
-	private Date orderDate;
 
 }

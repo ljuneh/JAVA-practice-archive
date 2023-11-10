@@ -20,7 +20,6 @@
     <title>market</title>
 </head>
 <body>
-    <div class="d-none" id="msg">${msg}</div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -28,27 +27,24 @@
                 <form action="/shopping/ordertobasket">
                     <div class="modal-header">
                         <div class="modal-title" id="exampleModalLabel">
-                            <!-- <input name="name" class="d-block" id="title-for-modal" type="text" readonly value="상품명 타이틀"> -->
-                            <h5 id="title-for-modal">상품명 타이틀</h5>
+                            <input name="name" class="d-block" id="title-for-modal" type="text" readonly value="상품명 타이틀">
+                            <!-- <h5 id="title-for-modal">상품명 타이틀</h5> -->
                             <input name="code" type="text" class="d-none" id="code-for-modal" value="code">
-                            <!-- <input name="current" type="text" class="d-none" id="current-for-modal" value="current"> -->
-                            <div class="d-none" id="current-for-modal"></div>
-                            <!-- <input name="price" id="price-for-modal" style="display: inline-block;" value="??,???"> -->
-                            <div class="d-inline-block" id="price-for-modal"></div>
+                            <input name="current" type="text" class="d-none" id="current-for-modal" value="current">
+                            <input name="price" id="price-for-modal" style="display: inline-block;" value="??,???">
                             <p style="display: inline-block;">원</p>
                         </div>
                         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                         <div class="countbutton d-flex" id="countbutton">
                             <button type="button" id="minus" onclick="countNumber('minus')" disabled="true">-</button>
-                            <input name="quantity" id="count" type="number" min="1" max="" value="1">
+                            <input name="quantity" id="count" type="number" min="1" value="1">
                             <button type="button" id="plus" onclick="countNumber('plus')">+</button>
                         </div>
                     </div>
                     <div class="modal-body d-flex justify-content-between align-bottom">
                         <p class="d-inline-block fw-bold">합계</p>
                         <div>
-                            <!-- <input name="totalprice" type="text" class="d-inline-block modalprice fw-bolder" id="totalprice-for-modal" value="??,???"> -->
-                            <div class="d-inline-block modalprice fw-bolder" id="totalprice-for-modal"></div>
+                            <input name="totalprice" type="text" class="d-inline-block modalprice fw-bolder" id="totalprice-for-modal" value="??,???">
                             <h4 style="display: inline-block;">원</h4>
                         </div>
                     </div>
@@ -88,7 +84,7 @@
                     		<div class="bar"></div>
                   		</li>
                           <li class="nav-item">
-                    		<a class="nav-link active" aria-current="page" href="/shopping/displayinsales">신상품</a>
+                    		<a class="nav-link active" aria-current="page" href="/shopping/displaygoods">신상품</a>
                     		<div class="bar"></div>
                   		</li>
                         <li class="nav-item">
@@ -188,12 +184,6 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
     <script>
-        var message = $("#msg").html();
-        console.log(message);
-        if(message!="") {
-            alert(message);
-        }
-
 		function progressBar() {
         	var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         	var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -241,14 +231,14 @@
             const pbutton = document.getElementById('plus');
             const result = document.getElementById('count');
             let number = parseInt(result.value);
-            const price = parseInt(document.getElementById('price-for-modal').innerHTML);
+            const price = parseInt(document.getElementById('price-for-modal').value);
             const totalprice = price*number;
-            const current = parseInt(document.getElementById('current-for-modal').innerHTML);
+            const current = parseInt(document.getElementById('current-for-modal').value);
 
             result.max = current;
 
 
-            $("#totalprice-for-modal").text(totalprice);
+            $("#totalprice-for-modal").val(totalprice);
             if (number > 1) {
                 mbutton.disabled=false;
                 console.log("button able");
@@ -275,23 +265,15 @@
             console.log(name.html());
 
 
-            $("#title-for-modal").text(name.html());
+            $("#title-for-modal").val(name.html());
             $("#code-for-modal").val(code.html());
-            $("#price-for-modal").text(price.html());
-            $("#totalprice-for-modal").text(price.html());
+            $("#price-for-modal").val(price.html());
+            $("#totalprice-for-modal").val(price.html());
 
             
-            $("#current-for-modal").text(current.html());
-
-            const maxquantity = parseInt(current.html());
-
-            $("#count").attr({
-                "max" : maxquantity
-            })
+            $("#current-for-modal").val(current.html());
         });
 
     </script>
-
-    
 </body>
 </html>

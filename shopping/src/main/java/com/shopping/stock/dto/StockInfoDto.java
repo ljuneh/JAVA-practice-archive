@@ -1,4 +1,4 @@
-package com.shopping.display.dto;
+package com.shopping.stock.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,20 +11,11 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class InsalesGoodsDto {
+public class StockInfoDto {
 	private String goodsCode;
 	
 	private String goodsName;
 	
-	private int price;
-	
 	private int goodsQuantity;
-	
-	private String imageSource;
-	
+
 }
-//
-//select goodscode, goodsname, price
-//from insalesgoods
-//where UTL_MATCH.jaro_winkler_similarity(goodsname, '잡채') > 70
-//order by goodscode asc

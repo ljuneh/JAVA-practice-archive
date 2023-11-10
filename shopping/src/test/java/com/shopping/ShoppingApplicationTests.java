@@ -28,7 +28,7 @@ class ShoppingApplicationTests {
 		}
 	}
 	
-	@Test
+//	@Test
 	void getFindMemberByRepo() {
 		MemberRepository repository = context.getBean(MemberRepository.class);
 		

@@ -90,20 +90,20 @@
     <form:form modelAttribute="registerDto" action="/shopping/registration" method="POST">
     	<div class="form-group">
             <form:label path="name">Username:</form:label>
-            <form:input path="name" type="text" required/>
+            <form:input path="name" type="text" required="required"/>
         </div>
         <div class="form-group">
             <form:label path="id">id:</form:label>
-            <form:input path="id" type="text" required/>
+            <form:input path="id" type="text" required="required"/>
             <form:errors path="id"></form:errors>
         </div>
         <div class="form-group">
             <form:label path="password">Password:</form:label>
-            <form:input path="password" type="password" required/>
+            <form:input path="password" type="password" required="required"/>
         </div>
         <div class="form-group">
             <form:label path="email">Email Address:</form:label>
-            <form:input path="email" type="email" required/>
+            <form:input path="email" type="email" required="required"/>
         </div>
         <button type="submit">Register</button>
         <button type="button" class="back-button" onclick="history.back()">Back</button>

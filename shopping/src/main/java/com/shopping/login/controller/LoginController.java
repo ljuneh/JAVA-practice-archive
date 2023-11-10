@@ -5,12 +5,10 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +53,10 @@ public class LoginController {
 		session.setAttribute("id", userInfo.getId());
 		session.setAttribute("name", userInfo.getName());
 		session.setMaxInactiveInterval(1800);
+		
+		if(userInfo.getAuth().equals("A")) {
+			return "redirect:/stock";
+		}
 		return "redirect:/displayinsales";
 	}
 

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 @Configuration
-@MapperScan("com.shopping.dao, com.shopping.login.dao, com.shopping.display.dao")
+@MapperScan("com.shopping.dao, com.shopping.login.dao, com.shopping.display.dao, com.shopping.stock.dao")
 public class OracleConfig {
 	
 	@Bean

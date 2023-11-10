@@ -34,6 +34,17 @@
 }
 
 
+.basket-goods {
+    border: 1px solid structure.$border-color;
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 50px;
+    background-color: structure.$bg-color;
+    box-sizing: border-box;
+    padding: 10px;
+    margin-bottom: 50px;
+}
+
 .send-button {
     display: block;
     width: 100px;

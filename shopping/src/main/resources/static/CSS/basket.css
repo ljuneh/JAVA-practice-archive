@@ -108,6 +108,17 @@ footer {
   margin-right: 0px;
 }
 
+.basket-goods {
+  border: 1px solid rgba(100, 100, 100, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  min-height: 50px;
+  background-color: #e0e0e0;
+  box-sizing: border-box;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+
 .send-button {
   display: block;
   width: 100px;
@@ -125,4 +136,4 @@ main, footer {
     width: 100%;
     margin: 5px 0px;
   }
-}/*# sourceMappingURL=stock.css.map */
+}/*# sourceMappingURL=basket.css.map */
