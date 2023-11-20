@@ -10,4 +10,15 @@
 		AND i.goodscode = g.goodscode
  	]]> 
 	</select>
+	
+	<select id="retsearchedGoodsDtoList" resultType="com.shopping.display.dto.InsalesGoodsDto">
+ 	<![CDATA[
+ 		select i.goodscode, i.goodsname, i.price, s.goodsquantity, g.imagesource
+		from insalesgoods i, stockinfo s, goodsimage g
+		where UTL_MATCH.jaro_winkler_similarity(i.goodsname, #{name}) > 60
+		and i.goodscode = s.goodscode
+		and i.goodscode = g.goodscode
+		order by goodscode asc
+ 	]]> 
+	</select>
 </mapper>

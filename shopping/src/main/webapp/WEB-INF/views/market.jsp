@@ -62,8 +62,8 @@
     </div>
 
     <div class="search-container d-flex justify-content-between">
-        <form class="d-flex search-box">
-            <input class="form-control me-2 border-0" type="search" placeholder="검색어를 입력해주세요" aria-label="Search">
+        <form class="d-flex search-box" action="/shopping/search">
+            <input class="form-control me-2 border-0" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="searchName">
             <button class="btn" type="submit"><i class="bi bi-search"></i></button>
         </form>
         <div class="recieveuserinfo d-flex flex-sm-row flex-column align-content-center">

@@ -28,3 +28,10 @@ public class InsalesGoodsDto {
 //from insalesgoods
 //where UTL_MATCH.jaro_winkler_similarity(goodsname, '잡채') > 70
 //order by goodscode asc
+
+//select i.goodscode, i.goodsname, i.price, s.goodsquantity, g.imagesource
+//from insalesgoods i, stockinfo s, goodsimage g
+//where UTL_MATCH.jaro_winkler_similarity(i.goodsname, '잡채') > 60
+//and i.goodscode = s.goodscode
+//and i.goodscode = g.goodscode
+//order by goodscode asc
