@@ -62,7 +62,7 @@
     </div>
 
     <div class="search-container d-flex justify-content-between">
-        <form class="d-flex search-box" action="/shopping/search">
+        <form class="d-flex search-box" action="/shopping/searchbyname">
             <input class="form-control me-2 border-0" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="searchName">
             <button class="btn" type="submit"><i class="bi bi-search"></i></button>
         </form>
@@ -135,6 +135,10 @@
         <div class="container">
             <div class="row">
 
+                <div id="searchnamebox" style="margin-bottom: 50px; display: none;">
+                    <h2><span id="searchname">${searchname}</span> 검색 결과</h2>
+                </div>
+
                 <c:forEach var="insalesDto" items="${insalesDtoList}">
 
                     <div class="col-lg-4 col-md-6">
@@ -192,6 +196,12 @@
         console.log(message);
         if(message!="") {
             alert(message);
+        }
+        var searchname = $("#searchname").html();
+        var searchnamebox = $("#searchnamebox");
+        console.log(searchname);
+        if(searchname!="") {
+            searchnamebox.css("display","block");
         }
 
 		function progressBar() {
@@ -289,6 +299,8 @@
                 "max" : maxquantity
             })
         });
+
+
 
     </script>
 

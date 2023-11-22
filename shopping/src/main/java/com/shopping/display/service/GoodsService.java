@@ -36,6 +36,15 @@ public class GoodsService {
 		return insalesList;
 	}
 	
+	public List<InsalesGoodsDto> retSearchList(String name) {
+		List<InsalesGoodsDto> insalesList = null;
+		
+		insalesList = displayDao.retsearchedGoodsDtoList(name);
+		
+		
+		return insalesList;
+	}
+	
 	public List<OrderInfoDto> retBasketList(String id, String confirmed) {
 		List<OrderInfo> basketList = null;
 		List<OrderInfoDto> basketDtoList = new ArrayList<OrderInfoDto>();

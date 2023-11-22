@@ -52,6 +52,29 @@ public class DisplayController {
 		return "market";
 	}
 	
+	@RequestMapping("/searchbyname")
+	public String displaySearchedGoods(HttpServletRequest request, @RequestParam("searchName") String searchName, ModelMap modelMap) {
+		
+		userService.sessionCheck(request, modelMap);
+		
+		Map<String, ?> flashMap = RequestContextUtils.getInputFlashMap(request);
+		
+		String msg = null;
+		if(flashMap != null){
+			msg = (String)flashMap.get("msg");
+		}
+		
+	    modelMap.addAttribute("msg", msg);
+	    System.out.println("msg : "+msg);
+	    
+	    modelMap.addAttribute("searchname", searchName);
+	    
+	    List<InsalesGoodsDto>insalesDtoList = goodsService.retSearchList(searchName);
+		modelMap.addAttribute("insalesDtoList", insalesDtoList);
+		
+		return "market";
+	}
+	
 	@RequestMapping("displaybasket")
 	public String displayBasket(HttpServletRequest request, ModelMap modelMap) {
 		String id = userService.sessionCheck(request, modelMap);
